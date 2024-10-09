@@ -1,17 +1,39 @@
 <template>
   <div class="login-view">
-    <div class="logo-container">
-      <LogoIcon :size="200" />
-    </div>
-    <div class="form-container">
-      <LoginForm />
+    <div class="content-wrapper">
+      <div class="logo-container">
+        <LogoIcon :size="logoSize" />
+      </div>
+      <div class="form-container">
+        <LoginForm />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+  import {
+    ref,
+    onMounted,
+    onUnmounted
+  } from 'vue'
   import LogoIcon from '@/components/common/LogoComponent.vue'
   import LoginForm from '@/components/users/LoginForm.vue'
+
+  const logoSize = ref(200)
+
+  const updateLogoSize = () => {
+    logoSize.value = window.innerHeight < 600 ? 150 : 200
+  }
+
+  onMounted(() => {
+    updateLogoSize()
+    window.addEventListener('resize', updateLogoSize)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', updateLogoSize)
+  })
 </script>
 
 <style scoped>
@@ -20,7 +42,16 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
+
+
+  }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
   }
 
   .logo-container,
@@ -32,7 +63,7 @@
   }
 
   @media (max-width: 768px) {
-    .login-view {
+    .content-wrapper {
       flex-direction: column;
     }
 
@@ -43,6 +74,12 @@
 
     .logo-container {
       margin-bottom: 20px;
+    }
+  }
+
+  @media (max-height: 600px) {
+    .login-view {
+      padding: 10px;
     }
   }
 </style>

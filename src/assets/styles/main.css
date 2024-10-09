@@ -1,12 +1,16 @@
 /* Reset some default styles */
+
+/* Set the global background color */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* Set the global background color */
+html {
+  height: 100vh;
+}
 body {
+  height: 100vh;
   background-color: #f0f0f0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
