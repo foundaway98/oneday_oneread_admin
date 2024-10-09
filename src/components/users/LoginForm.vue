@@ -21,7 +21,11 @@
   import {
     ref
   } from 'vue'
+  import {
+    useRouter
+  } from 'vue-router';
 
+  const router = useRouter()
   const id = ref('')
   const password = ref('')
   const title = ref('One Day One Read')
@@ -29,6 +33,7 @@
 
   const handleSubmit = () => {
     console.log('Login attempt', id.value, password.value)
+    router.replace('/main');
   }
 
   const handleJoin = () => {
